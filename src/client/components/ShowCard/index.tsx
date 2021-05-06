@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { makeStyles, Card, Typography, CardActionArea, CardMedia, CardContent, ButtonBase } from '@material-ui/core';
-import { Skeleton, Rating } from '@material-ui/lab';
+import { ShowRating as Rating } from '../ShowRating';
+
+import { Skeleton } from '@material-ui/lab';
 import placeHolderImage from '../../images/show_image_placeholder.png';
 export interface ShowCardProps {
     /**
@@ -70,7 +72,7 @@ export const ShowCard: React.FC<ShowCardProps> = (props: ShowCardProps) => {
                     title={name}
                 />
                 <CardContent className={classes.content}>
-                    <Rating readOnly size="small" disabled />
+                    <Rating size="small" />
                     <Typography gutterBottom variant="h5" component="h2">
                         <Skeleton />
                     </Typography>
@@ -93,7 +95,7 @@ export const ShowCard: React.FC<ShowCardProps> = (props: ShowCardProps) => {
             <ButtonBase onClick={cardClicked} className={classes.cardAction}>
                 <CardMedia className={classes.media} component="img" image={pictureUrl} title={name} />
                 <CardContent>
-                    <Rating readOnly size="small" value={rating} />
+                    <Rating size="small" rating={rating} />
                     <Typography className={classes.name}>{name}</Typography>
                     {/* <Typography variant="body2" color="textSecondary" component="p">
                         {description}
