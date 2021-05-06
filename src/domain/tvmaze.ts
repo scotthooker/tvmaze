@@ -11,7 +11,9 @@ export const getShow = (showId: string): Promise<showDetails> => {
     return tvmaze.shows.get(showId, ['cast']).then(showTransformer);
 };
 
-export const schedule = (): Promise<showSummary[]> => {
-    return tvmaze.schedule('GB', '2021-05-04').then((data) => data.map(scheduleTransformer));
-    // return tvmaze.schedule('GB').then((data) => console.log);
+export const schedule = (chosenDate?: string): Promise<showSummary[]> => {
+    const date = new Date();
+    const today = date.toISOString().substring(0, 10);
+    const dateParam = chosenDate || today;
+    return tvmaze.schedule('GB', dateParam).then((data) => data.map(scheduleTransformer));
 };
