@@ -26,7 +26,6 @@ const HomePage: React.FC = () => {
     const { loading, schedule, shows } = useData();
 
     useEffect(() => {
-        // search('something');
         schedule();
     }, []);
 
@@ -37,7 +36,7 @@ const HomePage: React.FC = () => {
     const newShows = [...shows];
 
     const gridResults = newShows.length ? (
-        <Grid container spacing={0}>
+        <Grid container spacing={0} data-testid="grid-container">
             {newShows.map((show, i) => (
                 <Grid key={i} item xs={6} md={2} className={classes.gridItem}>
                     <ShowCard loading={loading} {...show} onPress={onPress} />

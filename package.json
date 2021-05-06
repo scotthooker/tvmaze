@@ -1,5 +1,6 @@
 {
   "name": "tvmaze",
+  "homepage": "http://applicity.github.io/tvmaze",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
@@ -31,7 +32,9 @@
     "cypress:run:chrome": "cypress run --browser chrome",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
