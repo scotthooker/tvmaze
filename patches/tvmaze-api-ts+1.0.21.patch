@@ -1,0 +1,127 @@
+diff --git a/node_modules/tvmaze-api-ts/index.d.ts b/node_modules/tvmaze-api-ts/index.d.ts
+index 6c669a4..11310f9 100644
+--- a/node_modules/tvmaze-api-ts/index.d.ts
++++ b/node_modules/tvmaze-api-ts/index.d.ts
+@@ -2,7 +2,7 @@ export interface Ischedule {
+     time: string;
+     days: string[];
+ }
+-export interface Iratring {
++export interface Irating {
+     average: number;
+ }
+ export interface Icountry {
+@@ -12,7 +12,7 @@ export interface Icountry {
+ }
+ export interface Inetwork {
+     id: number;
+-    names: string;
++    name: string;
+     country: Icountry;
+ }
+ export interface Iexternals {
+@@ -74,6 +74,12 @@ export interface Iepisode {
+     summary: string;
+     _links: I_links;
+ }
++
++export interface IscheduleItem extends Iepisode {
++    show: Ishow;
++    type: string;
++}
++
+ export interface Iseason {
+     id: number;
+     url: string;
+@@ -94,6 +100,7 @@ export interface Iupdates {
+ export interface Iperson {
+     id: number;
+     url: string;
++    name?: string;
+     country: Icountry;
+     birtday: string;
+     deathday: string | null;
+@@ -129,9 +136,9 @@ export interface Ishow {
+     premiered: string;
+     officialSite: string;
+     schedule: Ischedule;
+-    ratring: Iratring;
++    rating: Irating;
+     weight: number;
+-    netwoek: Inetwork;
++    network: Inetwork;
+     webChannel: string | null;
+     externals: Iexternals;
+     image: Iimage;
+@@ -185,7 +192,7 @@ export declare class Tvmaze {
+     shows: Shows;
+     people: People;
+     scrape: Scrape;
+-    schedule(country?: string, date?: string): Promise<unknown>;
++    schedule(country?: string, date?: string): Promise<IscheduleItem[]>;
+     fullSchedule(): Promise<unknown>;
+ }
+ export declare const tvmaze: Tvmaze;
+diff --git a/node_modules/tvmaze-api-ts/index.ts b/node_modules/tvmaze-api-ts/index.ts
+index e4f8090..966a535 100644
+--- a/node_modules/tvmaze-api-ts/index.ts
++++ b/node_modules/tvmaze-api-ts/index.ts
+@@ -6,7 +6,7 @@ export interface Ischedule {
+   days: string[]
+ }
+ 
+-export interface Iratring {
++export interface Irating {
+   average: number
+ }
+ 
+@@ -18,7 +18,7 @@ export interface Icountry {
+ 
+ export interface Inetwork {
+   id: number
+-  names: string
++  name: string
+   country: Icountry
+ }
+ 
+@@ -90,6 +90,11 @@ export interface Iepisode {
+   _links: I_links
+ }
+ 
++export interface IscheduleItem extends Iepisode {
++    show: Ishow;
++    type: string;
++}
++
+ export interface Iseason {
+   id: number
+   url: string
+@@ -112,6 +117,7 @@ export interface Iupdates {
+ export interface Iperson {
+   id: number
+   url: string
++  name?: string
+   country: Icountry
+   birtday: string
+   deathday: string | null
+@@ -151,9 +157,9 @@ export interface Ishow {
+   premiered: string
+   officialSite: string
+   schedule: Ischedule
+-  ratring: Iratring
++  rating: Irating
+   weight: number
+-  netwoek: Inetwork
++  network: Inetwork
+   webChannel: string | null
+   externals: Iexternals
+   image: Iimage
+@@ -348,7 +354,7 @@ export class Tvmaze {
+   public schedule (country?: string, date?: string) {
+     let queryString = '/schedule?'
+     if (country) queryString += `country=${country}&`
+-    if (country) queryString += `date=${date}`
++    if (date) queryString += `date=${date}`
+     return Common.apiQuery(queryString)
+   }
+ 
