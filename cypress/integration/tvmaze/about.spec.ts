@@ -1,12 +1,10 @@
-describe('The Home Page', () => {
+describe('The About Page', () => {
     it('successfully loads', () => {
-        cy.visit('/');
-        cy.contains('Home');
-        cy.contains('About');
-        cy.contains('Search');
+        cy.visit('/#/about');
+        cy.contains('Example TVMaze App');
     });
 
-    it('should navigate to the about page', () => {
+    it('should be able to navigate to the about page', () => {
         cy.visit('/');
         cy.get('[role="button"]').contains('About').click();
         cy.contains('About Page');

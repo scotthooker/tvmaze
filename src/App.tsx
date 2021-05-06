@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route, Link as RouterLink } from 'react-router-dom';
 import { AppBar, Button, makeStyles } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 

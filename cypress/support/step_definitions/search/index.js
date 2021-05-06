@@ -4,8 +4,15 @@ const errors = {
     'no results': 'No matching shows',
 };
 
-Given('I am on the search page', () => {
-    cy.visit('/search');
+const pages = {
+    search: '/#/search',
+};
+
+Given('I am on the {} page', (page) => {
+    const pagePath = pages[page];
+    expect(!!pagePath).to.be.true;
+
+    cy.visit(pagePath);
 });
 
 When('the search box is empty', () => {
