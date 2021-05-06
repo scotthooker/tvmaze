@@ -69,7 +69,7 @@ export const ShowRating: React.FC<ShowRatingProps> = (props: ShowRatingProps) =>
 
     return (
         <div className={classes.root}>
-            <Rating readOnly size={size} value={loading ? 0 : rating} disabled={loading} />
+            <Rating readOnly size={size} precision={0.1} value={loading ? 0 : rating} disabled={loading} />
             {valueContent}
         </div>
     );
